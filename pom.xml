@@ -7,7 +7,7 @@
     <packaging>war</packaging>
     <name>smart-campus-api-1.0-SNAPSHOT</name>
     
-     <dependencies>
+    <dependencies>
         <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
