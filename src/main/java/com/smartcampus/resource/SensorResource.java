@@ -25,13 +25,13 @@ public class SensorResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Sensor> getAllSensors(@QueryParam("type") @DefaultValue("") String type) {
-        List<Sensor> all = new ArrayList<>(DataStore.SENSORS.values());
+        List<Sensor> allSeonsors = new ArrayList<>(DataStore.SENSORS.values());
         if (!type.isEmpty()) {
-            return all.stream()
+            return allSeonsors.stream()
                     .filter(sensor -> type.equalsIgnoreCase(sensor.getType()))
                    .collect(Collectors.toList());
         }
-        return all;
+        return allSeonsors;
     }
 
     @POST
@@ -40,7 +40,7 @@ public class SensorResource {
     public Response createSensor(Sensor sensor, @Context UriInfo uriInfo) {
         if (sensor.getRoomId() == null || !DataStore.ROOMS.containsKey(sensor.getRoomId())) {
             throw new LinkedResourceNotFoundException(
-                    "Cannot create sensor: room '" + sensor.getRoomId() + "' does not exist."
+            "Cannot create sensor: room '" + sensor.getRoomId() + "' does not exist."
             );
         }
         if (sensor.getId() == null || sensor.getId().isEmpty()) {

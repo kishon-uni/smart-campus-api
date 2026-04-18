@@ -63,7 +63,7 @@ public class SensorRoomResource {
         }
         if (room.getSensorIds() != null && !room.getSensorIds().isEmpty()) {
             throw new RoomNotEmptyException(
-                    "Cannot delete room '" + roomId + "': it still has "
+                    "Cannot delete room '" + roomId + "': because it still has "
                     + room.getSensorIds().size() + " sensor(s) assigned. Remove all sensors before deleting the room."
             );
         }

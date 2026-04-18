@@ -46,7 +46,7 @@ public class SensorReadingResource {
         }
         if ("MAINTENANCE".equalsIgnoreCase(sensor.getStatus())) {
             throw new SensorUnavailableException(
-                    "Sensor '" + sensorId + "' is in MAINTENANCE and cannot accept new readings."
+                    "Sensor '" + sensorId + "' is in MAINTENANCE status and cannot accept new readings."
             );
         }
 
@@ -54,9 +54,8 @@ public class SensorReadingResource {
         reading.setTimestamp(System.currentTimeMillis());
 
         List<SensorReading> readings = DataStore.SENSOR_READINGS.get(sensorId);
-        if (readings == null) {
-            readings = new ArrayList<>();
-            DataStore.SENSOR_READINGS.put(sensorId, readings);
+        if (readings ==  null) {
+            DataStore.SENSOR_READINGS.put(sensorId, new ArrayList<>());
         }
         readings.add(reading);
         sensor.setCurrentValue(reading.getValue());

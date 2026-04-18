@@ -20,13 +20,6 @@ public class Room implements BaseModel {
         this.sensorIds = new ArrayList<>();
     }
 
-    public Room(String id, String name, int capacity, List<String> sensorIds) {
-        this.id = id;
-        this.name = name;
-        this.capacity = capacity;
-        this.sensorIds = sensorIds != null ? sensorIds : new ArrayList<>();
-    }
-
     @Override
     public String getId() {
         return id;

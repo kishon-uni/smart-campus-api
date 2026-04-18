@@ -17,7 +17,7 @@ public class DiscoveryResource {
 
         response.put("version", "1.0");
         response.put("description", "Smart Campus Sensor & Room Management API");
-        response.put("contact", "admin@smartcampus.edu");
+        response.put("contact", "admin@smartcampus.lk");
 
         resources.put("rooms", "/api/v1/rooms");
         resources.put("sensors", "/api/v1/sensors");
