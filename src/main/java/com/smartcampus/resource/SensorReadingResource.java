@@ -19,6 +19,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 public class SensorReadingResource {
+    private static final String SENSOR_MAINTENANCE_STATUS = "MAINTENANCE";
+
     private final String sensorId;
 
     public SensorReadingResource(String sensorId) {
@@ -44,9 +46,9 @@ public class SensorReadingResource {
         if (sensor == null) {
             throw new LinkedResourceNotFoundException("Sensor not found: " + sensorId);
         }
-        if ("MAINTENANCE".equalsIgnoreCase(sensor.getStatus())) {
+        if (SENSOR_MAINTENANCE_STATUS.equalsIgnoreCase(sensor.getStatus())) {
             throw new SensorUnavailableException(
-                    "Sensor '" + sensorId + "' is in MAINTENANCE status and cannot accept new readings."
+                    "Sensor '" + sensorId + "' is in " + SENSOR_MAINTENANCE_STATUS + " status and cannot accept new readings."
             );
         }
 
