@@ -1,7 +1,7 @@
 package com.smartcampus.resource;
 
 import com.smartcampus.data.DataStore;
-import com.smartcampus.exception.LinkedResourceNotFoundException;
+import com.smartcampus.exception.DataNotFoundException;
 import com.smartcampus.exception.SensorUnavailableException;
 import com.smartcampus.model.Sensor;
 import com.smartcampus.model.SensorReading;
@@ -31,7 +31,7 @@ public class SensorReadingResource {
     public Response getReadings() {
         Sensor sensor = DataStore.SENSORS.get(sensorId);
         if (sensor == null) {
-            throw new LinkedResourceNotFoundException("Sensor not found: " + sensorId);
+            throw new DataNotFoundException("Sensor not found: " + sensorId);
         }
         List<SensorReading> readings = DataStore.SENSOR_READINGS.getOrDefault(sensorId, new ArrayList<>());
         return Response.ok(readings).build();
@@ -43,7 +43,7 @@ public class SensorReadingResource {
     public Response addReading(SensorReading reading, @Context UriInfo uriInfo) {
         Sensor sensor = DataStore.SENSORS.get(sensorId);
         if (sensor == null) {
-            throw new LinkedResourceNotFoundException("Sensor not found: " + sensorId);
+            throw new DataNotFoundException("Sensor not found: " + sensorId);
         }
         if (SENSOR_MAINTENANCE_STATUS.equalsIgnoreCase(sensor.getStatus())) {
             throw new SensorUnavailableException(
