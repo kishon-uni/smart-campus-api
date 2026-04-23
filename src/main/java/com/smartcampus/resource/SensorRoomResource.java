@@ -32,7 +32,7 @@ public class SensorRoomResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createRoom(Room room, @Context UriInfo uriInfo) {
         if (room.getId() == null || room.getId().isEmpty()) {
-            room.setId("R" + (DataStore.ROOMS.size() + 1));
+            room.setId(DataStore.nextRoomId());
         }
         if (room.getSensorIds() == null) {
             room.setSensorIds(new ArrayList<>());
