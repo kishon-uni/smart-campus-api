@@ -351,7 +351,7 @@ Why is HTTP 422 often considered more semantically accurate than a standard 404 
 
 **Answer**
 
-payload contains an invalid reference. In the SensorResource , POST /api/v1/sensors is a valid endpoint and the request body may be valid JSON, but if the supplied roomId does not exist then the server cannot process the entity correctly. Using 404 would suggest that the requested endpoint or requested direct resource could not be found. In contrast, 422 communicates that the request syntax is acceptable, but the content fails semantic validation because it points to a linked resource that does not exist.
+HTTP 422 is often more semantically accurate than 404 when the endpoint itself is valid but the request payload contains an invalid reference. In `SensorResource`, `POST /api/v1/sensors` is a valid endpoint and the request body may be valid JSON, but if the supplied `roomId` does not exist then the server cannot process the entity correctly. Using 404 would suggest that the requested endpoint or directly addressed resource could not be found. In contrast, 422 communicates that the request syntax is acceptable, but the content fails semantic validation because it points to a linked resource that does not exist.
 
 #### 5.4 The Global Safety Net (500)
 
@@ -361,10 +361,7 @@ From a cybersecurity standpoint, explain the risks associated with exposing inte
 
 **Answer**
 
-Cybersecurity risks of exposing Java stack traces
-Exposing stack traces to external clients leaks internal implementation details that attackers can use for reconnaissance. A stack trace can reveal package names, class names, method names, library versions, file paths, and the internal structure of the application. That information makes it easier to identify frameworks in use, guess vulnerable components, and target specific code paths. It can also expose logic assumptions and validation gaps, which may help an attacker
-
-plan malicious requests more effectively. For that reason, the API should log the full error internally for developers, but only return a generic `500 Internal Server Error` message to clients. The request syntax is acceptable, but the content fails semantic validation because it points to a linked resource that does not exist.
+Exposing Java stack traces to external clients leaks internal implementation details that attackers can use for reconnaissance. A stack trace can reveal package names, class names, method names, library versions, file paths, and the internal structure of the application. That information makes it easier to identify frameworks in use, guess vulnerable components, and target specific code paths. It can also expose logic assumptions and validation gaps, which may help an attacker plan malicious requests more effectively. For that reason, the API should log the full error internally for developers, but only return a generic `500 Internal Server Error` message to clients.
 
 #### 5.5 API Request & Response Logging Filters
 
