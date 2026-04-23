@@ -44,7 +44,7 @@ public class SensorResource {
             );
         }
         if (sensor.getId() == null || sensor.getId().isEmpty()) {
-            sensor.setId("S" + (DataStore.SENSORS.size() + 1));
+            sensor.setId(DataStore.nextSensorId());
         }
         if (sensor.getStatus() == null || sensor.getStatus().isEmpty()) {
             sensor.setStatus("ACTIVE");

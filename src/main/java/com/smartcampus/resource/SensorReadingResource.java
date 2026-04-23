@@ -8,7 +8,6 @@ import com.smartcampus.model.SensorReading;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -52,12 +51,13 @@ public class SensorReadingResource {
             );
         }
 
-        reading.setId(UUID.randomUUID().toString());
+        reading.setId(DataStore.nextSensorReadingId());
         reading.setTimestamp(System.currentTimeMillis());
 
         List<SensorReading> readings = DataStore.SENSOR_READINGS.get(sensorId);
         if (readings ==  null) {
-            DataStore.SENSOR_READINGS.put(sensorId, new ArrayList<>());
+            readings = new ArrayList<>();
+            DataStore.SENSOR_READINGS.put(sensorId, readings);
         }
         readings.add(reading);
         sensor.setCurrentValue(reading.getValue());
